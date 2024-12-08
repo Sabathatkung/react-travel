@@ -122,32 +122,32 @@ const ReviewManager = () => {
   }, []);
 
   return (
-    <div className="bg-gradient-to-r from-blue-300 to-blue-600 p-6 min-h-screen">
+    <div className="min-h-screen bg-blue-100 p-8">
       <div className="container mx-auto p-4 bg-white shadow-lg rounded-lg">
         {/* หัวข้อหลัก */}
         <h1 className="text-4xl font-extrabold text-center text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-indigo-500 mb-6">
           Travel Review Management
         </h1>
         
-        {/* Add Review Button */}
+        {/* ปุ่มเพิ่มรีวิว */}
         <div className="flex justify-center mb-6">
           <button
             className="bg-gradient-to-r from-green-400 to-teal-500 text-white px-8 py-3 rounded-lg shadow-lg text-xl font-semibold hover:scale-105 transform transition-all hover:bg-gradient-to-l hover:from-teal-500 hover:to-green-400"
             onClick={handleOpenAddReview}
           >
-            Add Review
+            เพิ่มรีวิว
           </button>
         </div>
 
         <table className="table-auto w-full bg-white shadow-lg rounded-lg">
           <thead className="bg-gradient-to-r from-blue-400 to-blue-600 text-white">
             <tr>
-              <th className="px-6 py-4">Place</th>
-              <th className="px-6 py-4">Score</th>
-              <th className="px-6 py-4">Comment</th>
-              <th className="px-6 py-4">Last Updated</th>
-              <th className="px-6 py-4">Status</th>
-              <th className="px-6 py-4">Actions</th>
+              <th className="px-6 py-4">สถานที่</th>
+              <th className="px-6 py-4">คะแนน</th>
+              <th className="px-6 py-4">ความคิดเห็น</th>
+              <th className="px-6 py-4">แก้ไขล่าสุด</th>
+              <th className="px-6 py-4">สถานะ</th>
+              <th className="px-6 py-4">การกระทำ</th>
             </tr>
           </thead>
           <tbody>
@@ -168,7 +168,7 @@ const ReviewManager = () => {
                     } text-white px-4 py-2 rounded-full shadow-md transition-all duration-300 transform hover:scale-105`}
                     onClick={() => handleToggleStatus(review.id, review.status)}
                   >
-                    {review.status === "active" ? "Active" : "Inactive"}
+                    {review.status === "active" ? "เปิดใช้งาน" : "ปิดใช้งาน"}
                   </button>
                 </td>
                 <td className="px-6 py-4 space-x-2">
@@ -176,7 +176,7 @@ const ReviewManager = () => {
                     className="bg-yellow-500 text-white px-4 py-2 rounded-full shadow-md"
                     onClick={() => handleEdit(review)}
                   >
-                    Edit
+                    แก้ไข
                   </button>
                   <button
                     className="bg-red-500 text-white px-4 py-2 rounded-full shadow-md"
@@ -185,7 +185,7 @@ const ReviewManager = () => {
                       setDeletePopupOpen(true);
                     }}
                   >
-                    Delete
+                    ลบ
                   </button>
                 </td>
               </tr>
@@ -198,12 +198,12 @@ const ReviewManager = () => {
           <div className="fixed top-0 left-0 w-full h-full bg-black bg-opacity-50 flex items-center justify-center">
             <div className="bg-white p-8 rounded-lg shadow-lg w-1/2 max-w-3xl">
               <h2 className="text-2xl font-bold mb-6 text-center">
-                {editId ? "Edit Review" : "Add Review"}
+                {editId ? "แก้ไขรีวิว" : "เพิ่มรีวิว"}
               </h2>
               <form className="space-y-6">
                 <input
                   type="text"
-                  placeholder="Place Name"
+                  placeholder="ชื่อสถานที่"
                   className="w-full p-4 border border-gray-300 rounded-lg shadow-md focus:outline-none focus:ring-2 focus:ring-blue-400"
                   value={formData.place_name}
                   onChange={(e) =>
@@ -212,7 +212,7 @@ const ReviewManager = () => {
                 />
                 <div className="flex items-center justify-between space-x-4">
                   <div className="flex items-center space-x-4">
-                    <span className="text-lg font-semibold">Score:</span>
+                    <span className="text-lg font-semibold">คะแนน:</span>
                     <button
                       type="button"
                       className="bg-blue-500 text-white px-6 py-3 rounded-full shadow-md hover:bg-blue-600 transition-all"
@@ -231,7 +231,7 @@ const ReviewManager = () => {
                   </div>
                 </div>
                 <textarea
-                  placeholder="Comment"
+                  placeholder="ความคิดเห็น"
                   className="w-full p-4 border border-gray-300 rounded-lg shadow-md focus:outline-none focus:ring-2 focus:ring-blue-400"
                   rows="4"
                   value={formData.comment}
@@ -245,14 +245,14 @@ const ReviewManager = () => {
                     className="bg-blue-500 text-white px-8 py-3 rounded-full shadow-md"
                     onClick={handleSave}
                   >
-                    Save
+                    บันทึก
                   </button>
                   <button
                     type="button"
                     className="bg-gray-500 text-white px-8 py-3 rounded-full shadow-md"
                     onClick={() => setPopupOpen(false)}
                   >
-                    Cancel
+                    ยกเลิก
                   </button>
                 </div>
               </form>
@@ -265,7 +265,7 @@ const ReviewManager = () => {
           <div className="fixed top-0 left-0 w-full h-full bg-black bg-opacity-50 flex items-center justify-center">
             <div className="bg-white p-8 rounded-lg shadow-lg w-1/3">
               <h2 className="text-2xl font-bold mb-6 text-center">
-                Are you sure you want to delete this review?
+                คุณแน่ใจหรือไม่ที่จะลบรีวิวนี้?
               </h2>
               <div className="flex justify-end space-x-4">
                 <button
@@ -273,14 +273,14 @@ const ReviewManager = () => {
                   className="bg-red-500 text-white px-8 py-3 rounded-full shadow-md"
                   onClick={handleDelete}
                 >
-                  Delete
+                  ลบ
                 </button>
                 <button
                   type="button"
                   className="bg-gray-500 text-white px-8 py-3 rounded-full shadow-md"
                   onClick={() => setDeletePopupOpen(false)}
                 >
-                  Cancel
+                  ยกเลิก
                 </button>
               </div>
             </div>

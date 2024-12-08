@@ -120,37 +120,47 @@ function Dashboard() {
           </div>
         </div>
 
-        {/* Category List */}
-        <ul className="space-y-4">
-          {loading ? (
-            <p>กำลังโหลดข้อมูล...</p>
-          ) : error ? (
-            <p className="text-red-500">{error}</p>
-          ) : categories.length === 0 ? (
-            <p className="text-gray-500">ยังไม่มีประเภทสถานที่ในระบบ</p>
-          ) : (
-            categories.map((category) => (
-              <li
-                key={category.id || category.name} // ใช้ category.id หรือ category.name ถ้า id ยังไม่ชัดเจน
-                className="flex items-center justify-between border p-4 rounded-lg shadow-md bg-gray-50 hover:bg-gray-100 transition cursor-pointer"
-                onClick={() => setSelectedCategory(category)}
-              >
-                <div>
-                  <h2 className="text-xl font-semibold text-gray-800">
-                    {category.name}
-                  </h2>
-                  <p className="text-gray-600">{category.description}</p>
-                </div>
-                <button
-                  className="text-blue-600 hover:text-blue-800"
+        {/* Category List (Table) */}
+        {loading ? (
+          <p>กำลังโหลดข้อมูล...</p>
+        ) : error ? (
+          <p className="text-red-500">{error}</p>
+        ) : categories.length === 0 ? (
+          <p className="text-gray-500">ยังไม่มีประเภทสถานที่ในระบบ</p>
+        ) : (
+          <table className="w-full table-auto bg-white rounded-lg shadow-md">
+            <thead className="bg-blue-600 text-white">
+              <tr>
+                <th className="p-3 text-left">ชื่อประเภทสถานที่</th>
+                <th className="p-3 text-left">คำอธิบาย</th>
+                <th className="p-3 text-center">การจัดการ</th>
+              </tr>
+            </thead>
+            <tbody>
+              {categories.map((category) => (
+                <tr
+                  key={category.id || category.name}
+                  className="border-b hover:bg-gray-100 cursor-pointer"
                   onClick={() => setSelectedCategory(category)}
                 >
-                  แก้ไข
-                </button>
-              </li>
-            ))
-          )}
-        </ul>
+                  <td className="p-3">{category.name}</td>
+                  <td className="p-3">{category.description}</td>
+                  <td className="p-3 text-center">
+                    <button
+                      className="text-blue-600 hover:text-blue-800"
+                      onClick={(e) => {
+                        e.stopPropagation(); // ป้องกันไม่ให้คลิกที่ปุ่มเปิด modal ทำให้เลือก category
+                        setSelectedCategory(category);
+                      }}
+                    >
+                      แก้ไข
+                    </button>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        )}
       </div>
 
       {/* View Category Modal */}
