@@ -1,13 +1,8 @@
-// Import the functions you need from the SDKs you need
+// src/firebase.js
 import { initializeApp } from "firebase/app";
-import { getAuth } from "firebase/auth/cordova";
-import { getFirestore } from "firebase/firestore/lite";
-import { getStorage } from "firebase/storage";
-// TODO: Add SDKs for Firebase products that you want to use
-// https://firebase.google.com/docs/web/setup#available-libraries
+import { getFirestore } from "firebase/firestore";
 
-// Your web app's Firebase configuration
-// For Firebase JS SDK v7.20.0 and later, measurementId is optional
+// ใส่ค่าการตั้งค่า Firebase ของคุณ
 const firebaseConfig = {
   apiKey: "AIzaSyAXrIcpGByxVUS6wBbUE5gCXNv1Mna7ovc",
   authDomain: "angular-bc8c1.firebaseapp.com",
@@ -20,8 +15,6 @@ const firebaseConfig = {
 
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
-export default app;
 
+// Export Firestore database
 export const db = getFirestore(app);
-export const auth = getAuth(app);
-export const storage = getStorage(app);
