@@ -1,3 +1,4 @@
+// PlaceManage.jsx
 import { useState, useEffect } from "react";
 import { db } from "./firebase";
 import {
@@ -21,8 +22,8 @@ function PlaceManage() {
   });
   const [isEditing, setIsEditing] = useState(false);
   const [showModal, setShowModal] = useState(false);
-  const [toastMessage, setToastMessage] = useState(""); // State for Toast Notification
-  const [deleteConfirm, setDeleteConfirm] = useState({ id: null, show: false }); // State for Delete Confirmation
+  const [toastMessage, setToastMessage] = useState(""); // State สำหรับ Toast Notification
+  const [deleteConfirm, setDeleteConfirm] = useState({ id: null, show: false }); // State สำหรับ Delete Confirmation
 
   const placesCollection = collection(db, "places");
 
@@ -44,11 +45,11 @@ function PlaceManage() {
     if (isEditing) {
       const placeDoc = doc(db, "places", form.id);
       await updateDoc(placeDoc, { ...form });
-      setToastMessage("แก้ไขข้อมูลสถานที่สำเร็จ!"); // Show success message for editing
+      setToastMessage("แก้ไขข้อมูลสถานที่สำเร็จ!"); // แสดงข้อความสำเร็จเมื่อแก้ไข
       setIsEditing(false);
     } else {
       await addDoc(placesCollection, { ...form });
-      setToastMessage("เพิ่มสถานที่สำเร็จ!"); // Show success message for adding
+      setToastMessage("เพิ่มสถานที่สำเร็จ!"); // แสดงข้อความสำเร็จเมื่อเพิ่ม
     }
     setForm({ id: null, name: "", category: "", address: "", contact: "", isActive: true });
     setShowModal(false);
@@ -63,7 +64,7 @@ function PlaceManage() {
   };
 
   const handleDelete = async (id) => {
-    setDeleteConfirm({ id: null, show: false }); // Close confirmation modal
+    setDeleteConfirm({ id: null, show: false }); // ปิด confirmation modal
     const placeDoc = doc(db, "places", id);
     await deleteDoc(placeDoc);
     fetchPlaces();
@@ -72,7 +73,7 @@ function PlaceManage() {
   };
 
   const openDeleteConfirm = (id) => {
-    setDeleteConfirm({ id, show: true }); // Open confirmation modal
+    setDeleteConfirm({ id, show: true }); // เปิด confirmation modal
   };
 
   const openAddModal = () => {
@@ -108,10 +109,7 @@ function PlaceManage() {
           </thead>
           <tbody>
             {places.map((place, index) => (
-              <tr
-                key={place.id}
-                className={`${index % 2 === 0 ? "bg-gray-50" : "bg-white"}`}
-              >
+              <tr key={place.id} className={`${index % 2 === 0 ? "bg-gray-50" : "bg-white"}`}>
                 <td className="p-3">{place.name}</td>
                 <td className="p-3">{place.category}</td>
                 <td className="p-3">{place.address}</td>
@@ -140,9 +138,7 @@ function PlaceManage() {
       {showModal && (
         <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center">
           <div className="bg-white p-6 rounded-lg shadow-lg w-96">
-            <h3 className="text-lg font-semibold mb-4">
-              {isEditing ? "แก้ไขสถานที่" : "เพิ่มสถานที่"}
-            </h3>
+            <h3 className="text-lg font-semibold mb-4">{isEditing ? "แก้ไขสถานที่" : "เพิ่มสถานที่"}</h3>
             <form onSubmit={handleSubmit}>
               <div className="grid grid-cols-1 gap-4">
                 <input
@@ -204,9 +200,7 @@ function PlaceManage() {
         <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center">
           <div className="bg-white p-6 rounded-lg shadow-lg w-80">
             <h3 className="text-lg font-semibold mb-4">ยืนยันการลบ</h3>
-            <p className="text-gray-600 mb-4">
-              คุณแน่ใจหรือไม่ว่าต้องการลบสถานที่นี้?
-            </p>
+            <p className="text-gray-600 mb-4">คุณแน่ใจหรือไม่ว่าต้องการลบสถานที่นี้?</p>
             <div className="flex justify-end space-x-2">
               <button
                 onClick={() => setDeleteConfirm({ id: null, show: false })}
