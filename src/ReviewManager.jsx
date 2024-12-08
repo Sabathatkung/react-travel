@@ -125,9 +125,10 @@ const ReviewManager = () => {
     <div className="min-h-screen bg-blue-100 p-8">
       <div className="container mx-auto p-4 bg-white shadow-lg rounded-lg">
         {/* หัวข้อหลัก */}
-        <h1 className="text-4xl font-extrabold text-center text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-indigo-500 mb-6">
-          Travel Review Management
+        <h1 className="text-4xl font-bold text-center text-blue-600 mb-6">
+            Travel Review Management
         </h1>
+
         
         {/* ปุ่มเพิ่มรีวิว */}
         <div className="flex justify-center mb-6">

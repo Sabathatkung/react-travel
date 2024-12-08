@@ -85,10 +85,9 @@ function PlaceManage() {
   return (
     <div className="min-h-screen bg-blue-100 p-8">
       <div className="max-w-4xl mx-auto bg-white p-6 rounded-lg shadow-md">
-        <h2 className="text-2xl font-bold text-center text-gray-800 mb-5">
-          ระบบจัดการสถานที่ท่องเที่ยว
-        </h2>
-
+      <h2 className="text-2xl font-bold text-center text-blue-600 mb-5">
+        Tourist Attraction Management System
+      </h2>
         <button
           onClick={openAddModal}
           className="mb-5 w-full bg-blue-500 text-white py-2 rounded hover:bg-blue-600 transition duration-300"
