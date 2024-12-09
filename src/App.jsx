@@ -4,7 +4,8 @@ import ReviewManager from "./ReviewManager";
 import Dashboard from "./Dashboard";
 import PlaceManage from "./PlaceManage";
 import Navbar from "./Navbar";
-import User from "./User";
+import UserManager from "./UserManager";
+
 
 function App() {
   return (
@@ -13,9 +14,9 @@ function App() {
         <Navbar />
         <Routes>
           <Route path="/" element={<ReviewManager />} />
-          <Route path="/user" element={<User />} />
+          <Route path="/UserManager" element={<UserManager />} />
           <Route path="/dashboard" element={<Dashboard />} />
-          <Route path="/placemanage" element={<PlaceManage />} />
+          <Route path="/Placemanage" element={<PlaceManage />} />
         </Routes>
       </div>
     </Router>
